@@ -67,14 +67,20 @@ const server = http.createServer((req, res) => {
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
 
-  // GET
+  const todo = {
+    id: currentId,
+    title: `Title ${currentId}`,
+    completed: false,
+  };
+
+  // GET  /todos ---> List all todos
   if (req.method === 'GET') {
     // all todos
     if (req.url === '/todos') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todos }));
     } else if (req.url === `/todos/?id=${searchId}`) {
-      // Get todo by query id value
+      // GET  /todos?id=1. ----> List only single todo
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todoItem }));
     } else {
@@ -85,23 +91,20 @@ const server = http.createServer((req, res) => {
 
   // POST
   if (req.method === 'POST' && req.url === '/todos') {
-    const todo = {
-      id: currentId,
-      title: `Title ${currentId}`,
-      completed: false,
-    };
     todos.push(todo);
     res.writeHead(201, { 'Content-Type': 'text/plain' });
     res.end(JSON.stringify({ todos }));
   }
 
-  // PATCH
+  // PATCH /todos?id=1  ---> update existing todo using the id
   // 200 ok
   // 204 no content
   // 304 not modified
   // 404 bad request
 
-  // DELETE
+  // DELETE /todos?id=1  ---> removes existing todo using the id
+  // 202 accepted
+  // 204 not content
 });
 server.listen(3000, () => {
   console.log(`Server running at ${3000}`);

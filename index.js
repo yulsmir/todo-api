@@ -64,9 +64,12 @@ const server = http.createServer((req, res) => {
   const serverURL = url.parse(req.url, true);
   const searchId = serverURL.query.id;
   const todoItem = todos[searchId - 1];
+  const lastItemId = todos.length;
+  const currentId = lastItemId + 1;
 
+  // GET
   if (req.method === 'GET') {
-    // GET all todos
+    // all todos
     if (req.url === '/todos') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todos }));
@@ -74,12 +77,21 @@ const server = http.createServer((req, res) => {
       // Get todo by query id value
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todoItem }));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Wrong get request');
     }
   }
   // POST
-  if (req.method === 'POST') {
+  if (req.method === 'POST' && req.url === '/todos') {
+    const todo = {
+      id: currentId,
+      title: `Title ${currentId}`,
+      completed: false,
+    };
+    res.writeHead(201, { 'Content-Type': 'text/plain' });
+    res.end(JSON.stringify({ todos }));
   }
-
   // PUT
   // DELETE
 });

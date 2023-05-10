@@ -76,7 +76,7 @@ const server = http.createServer((req, res) => {
   // GET  /todos ---> List all todos
   if (req.method === 'GET') {
     // all todos
-    if (req.url === '/todos') {
+    if (req.url === '/todos' || req.url === '/') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todos }));
     } else if (req.url === `/todos/?id=${searchId}`) {

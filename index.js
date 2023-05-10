@@ -1,7 +1,11 @@
 const http = require('node:http');
 const fs = require('node:fs');
+const url = require('node:url');
 
-const PORT = 3000;
+// const SERVER_URL = new URL('https://127.0.0.1:3000/');
+
+// URL_DATA.search = '?id=';
+
 let todos = [
   {
     id: 1,
@@ -26,27 +30,33 @@ let todos = [
 ];
 
 const server = http.createServer((req, res) => {
-  // res.writeHead(200, { 'Content-Type': 'text/html' });
-  // res.end('Home');
+  // const URL = new URL(`${req.url}`);
+  const searchId = 1;
+  const todo = todos.filter((todo) => todo.id === searchId);
 
-  // READ JSON data
+  // GET
   if (req.method === 'GET') {
-    if (req.url === '/todos') {
+    if (req.url === '/todos' || req.url === '/') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end(JSON.stringify({ todos }));
+    } else if (req.url === `/todos/?id=${searchId}`) {
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end(JSON.stringify({ todo }));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Incorrect url');
+    }
+  }
+
+  // POST
+  if (req.method === 'POST') {
+    if (req.url === '/todos') {
+      res.writeHead(201, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todos }));
     }
   }
 });
 
-// const readData = () => {
-//   fs.readFile('./todos.json', 'utf-8', (error, data) => {
-//     if (error) throw error;
-//     const todos = JSON.parse(data);
-//     console.log(todos);
-//     return todos;
-//   });
-// };
-
-server.listen(PORT, () => {
-  console.log(`Server is listening on ${PORT}...`);
+server.listen(3000, () => {
+  console.log(`Server running at ${3000}`);
 });

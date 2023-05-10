@@ -8,28 +8,7 @@ const url = require('node:url');
 //   return JSON.parse(result);
 // });
 
-let todos = [
-  {
-    id: 1,
-    title: 'Title 1',
-    completed: true,
-  },
-  {
-    id: 2,
-    title: 'Title 2',
-    completed: true,
-  },
-  {
-    id: 3,
-    title: 'Title 3',
-    completed: true,
-  },
-  {
-    id: 4,
-    title: 'Title 4',
-    completed: true,
-  },
-];
+let todos = [];
 
 /*const server = http.createServer((req, res) => {
   const serverUrl = url.parse(req.url, true);
@@ -67,12 +46,6 @@ const server = http.createServer((req, res) => {
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
 
-  const todo = {
-    id: currentId,
-    title: `Title ${currentId}`,
-    completed: false,
-  };
-
   // GET  /todos ---> List all todos
   if (req.method === 'GET') {
     // all todos
@@ -80,9 +53,15 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.end(JSON.stringify({ todos }));
     } else if (req.url === `/todos/?id=${searchId}`) {
-      // GET  /todos?id=1. ----> List only single todo
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end(JSON.stringify({ todoItem }));
+      // Check if item with search id exists
+      if (searchId <= lastItemId) {
+        // GET  /todos?id=1. ----> List only single todo
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end(JSON.stringify({ todoItem }));
+      } else {
+        res.writeHead(204, { 'Content-Type': 'text/plain' });
+        res.end(JSON.stringify({ error: 'No such item' }));
+      }
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Wrong get request');
@@ -91,6 +70,12 @@ const server = http.createServer((req, res) => {
 
   // POST
   if (req.method === 'POST' && req.url === '/todos') {
+    const todo = {
+      id: currentId,
+      title: `Title ${currentId}`,
+      completed: false,
+    };
+
     todos.push(todo);
     res.writeHead(201, { 'Content-Type': 'text/plain' });
     res.end(JSON.stringify({ todos }));
@@ -102,7 +87,14 @@ const server = http.createServer((req, res) => {
   // 304 not modified
   // 404 bad request
 
-  // DELETE /todos?id=1  ---> removes existing todo using the id
+  // TODO: fix
+  // DELETE / todos ? id = 1  -- -> removes existing todo using the id
+  if (req.method === 'DELETE' && req.url === `/todos/?id=${searchId}`) {
+    const result = todos.filter((todo) => todo.id === !searchId);
+    res.writeHead(202, { 'Content-Type': 'text/plain' });
+    res.end(JSON.stringify({ result }));
+    return 'redirect:/';
+  }
   // 202 accepted
   // 204 not content
 });

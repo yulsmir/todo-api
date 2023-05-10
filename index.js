@@ -82,6 +82,7 @@ const server = http.createServer((req, res) => {
       res.end('Wrong get request');
     }
   }
+
   // POST
   if (req.method === 'POST' && req.url === '/todos') {
     const todo = {
@@ -89,10 +90,17 @@ const server = http.createServer((req, res) => {
       title: `Title ${currentId}`,
       completed: false,
     };
+    todos.push(todo);
     res.writeHead(201, { 'Content-Type': 'text/plain' });
     res.end(JSON.stringify({ todos }));
   }
-  // PUT
+
+  // PATCH
+  // 200 ok
+  // 204 no content
+  // 304 not modified
+  // 404 bad request
+
   // DELETE
 });
 server.listen(3000, () => {

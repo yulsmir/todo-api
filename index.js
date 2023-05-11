@@ -29,16 +29,6 @@ let todos = [
     title: 'Title 4',
     completed: false,
   },
-  {
-    id: 5,
-    title: 'Title 5',
-    completed: false,
-  },
-  {
-    id: 6,
-    title: 'Title 6',
-    completed: false,
-  },
 ];
 
 const server = http.createServer((req, res) => {
@@ -47,6 +37,12 @@ const server = http.createServer((req, res) => {
   const searchedItem = todos[searchId - 1];
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
+
+  const todo = {
+    id: currentId,
+    title: `Title ${currentId}`,
+    completed: false,
+  };
 
   // GET  /todos ---> List all todos
   if (req.method === 'GET') {
@@ -72,18 +68,29 @@ const server = http.createServer((req, res) => {
 
   // POST
   if (req.method === 'POST' && req.url === '/todos') {
-    const todo = {
-      id: currentId,
-      title: `Title ${currentId}`,
-      completed: false,
-    };
-
     todos.push(todo);
     res.writeHead(201, { 'Content-Type': 'text/plain' });
     res.end(JSON.stringify({ todos }));
   }
 
   // PATCH /todos?id=1  ---> update existing todo using the id
+  if (req.method === 'PATCH' && req.url === `/todos/?id=${searchId}`) {
+    console.log(searchedItem);
+    // Change values of title and completed status. ID stays the same
+    searchedItem.title !== 'Edited'
+      ? (searchedItem.title = 'Edited')
+      : (searchedItem.title = 'Edited again');
+
+    searchedItem.completed === true
+      ? (searchedItem.completed = false)
+      : (searchedItem.completed = true);
+
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end(JSON.stringify({ todo: searchedItem }));
+  } else {
+    res.writeHead(204, { 'Content-Type': 'text/plain' });
+    res.end(JSON.stringify({ error: 'No content' }));
+  }
   // 200 ok
   // 204 no content
   // 304 not modified
@@ -93,11 +100,11 @@ const server = http.createServer((req, res) => {
   // DELETE / todos ? id = 1  -- -> removes existing todo using the id
   if (req.method === 'DELETE' && req.url === `/todos/?id=${searchId}`) {
     const result = todos.filter((item) => item.id !== searchId);
+    // result.slice(0, searchId).concat(todos.slice(searchId + 1));
     res.writeHead(202, { 'Content-Type': 'text/plain' });
     res.end(JSON.stringify({ todos: result }));
     return 'redirect:/';
   }
-  // 202 accepted
   // 204 not content
 });
 server.listen(3000, () => {

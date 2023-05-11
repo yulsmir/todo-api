@@ -23,7 +23,7 @@ let todos = [
 
 const server = http.createServer((req, res) => {
   const serverURL = url.parse(req.url, true);
-  const searchId = serverURL.query.id;
+  const searchId = parseInt(serverURL.query.id);
   const searchedItem = todos[searchId - 1];
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
@@ -72,7 +72,7 @@ const server = http.createServer((req, res) => {
   // TODO: fix
   // DELETE / todos ? id = 1  -- -> removes existing todo using the id
   if (req.method === 'DELETE' && req.url === `/todos/?id=${searchId}`) {
-    const result = todos.filter((item) => item.id === !searchId);
+    const result = todos.filter((item) => item.id !== searchId);
     res.writeHead(202, { 'Content-Type': 'text/plain' });
     res.end(JSON.stringify({ todos: result }));
     return 'redirect:/';

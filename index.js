@@ -91,7 +91,7 @@ const server = http.createServer((req, res) => {
       ? (searchedItem.completed = false)
       : (searchedItem.completed = true);
 
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.writeHead(200, responseHead);
     res.end(JSON.stringify({ todo: searchedItem }));
   }
 
@@ -111,11 +111,11 @@ const server = http.createServer((req, res) => {
     // Delete with filter - v1
     // const result = todos.filter((item) => item.id !== searchId)
     // Delete with slice - v2
-    const result = todos.slice(0, searchId - 1).concat(todos.slice(searchId));
-    console.log(result);
+    todos = todos.slice(0, searchId - 1).concat(todos.slice(searchId));
+    console.log(todos);
 
     res.writeHead(202, { 'Content-Type': 'text/plain' });
-    res.end(JSON.stringify({ todos: result }));
+    res.end(JSON.stringify({ todos }));
 
     return 'redirect:/';
   }

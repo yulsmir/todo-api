@@ -9,7 +9,7 @@
 ![GET home](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-home.png)
 ![GET todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-todos.png)
 - [X] GET  /todos?id=1. ----> List only single todo 1 in this case is just example of id but it should work with any id stored
-![GET todo by id](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-todos.png)
+![GET todo by id](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-id.png)
 - [X] POST /todos ---> create new todo
 ![POST todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/post-todos.png)
 - [X] PATCH /todos?id=1  ---> update existing todo using the id

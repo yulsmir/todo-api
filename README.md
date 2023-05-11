@@ -15,7 +15,7 @@
 - [X] PATCH /todos?id=1  ---> update existing todo using the id
 ![PATCH todo by id](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-id.png)
 - [X] DELETE /todos?id=1  ---> removes existing todo using the id
-![DELETE todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/delet-id.png)
+![DELETE todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/delete-id.png)
 
 ## Project setup
 1. Clone repo

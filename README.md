@@ -6,10 +6,15 @@
 
 ### Endpoints implemented
 - [X] GET  /todos ---> List all todos
+![GET home](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-home.png)
+![GET todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-todos.png)
 - [X] GET  /todos?id=1. ----> List only single todo 1 in this case is just example of id but it should work with any id stored
 - [X] POST /todos ---> create new todo
+![POST todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/post-todos.png)
 - [X] PATCH /todos?id=1  ---> update existing todo using the id
+![PATCH todo with id](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/patch-id.png)
 - [X] DELETE /todos?id=1  ---> removes existing todo using the id
+![DELETE todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/delet-todo.png)
 
 ## Project setup
 1. Clone repo
@@ -20,6 +25,3 @@
   - ```localhost:3000/todos``` - shows all todos
   - ```localhost:3000/todos/?id=``` + add number 1-4 to show one existing item in a todo list 
   - use Thunder Client or Postman to check POST/PATCH/DELETE requests
-
-## Server demo
-[![Watch the demo](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-home.png)](https://raw.githubusercontent.com/yulsmir/todo-api/master/assets/videos/Server%20Work%20Demo.mov)

@@ -22,4 +22,4 @@
   - use Thunder Client or Postman to check POST/PATCH/DELETE requests
 
 ## Server demo
-[![Watch the demo](link to preview)]([https://youtu.be/vt5fpE0bzSY](https://raw.githubusercontent.com/yulsmir/todo-api/master/videos/Server%20Work%20Demo.mov))
+[![Watch the demo](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-home.png)](https://raw.githubusercontent.com/yulsmir/todo-api/master/assets/videos/Server%20Work%20Demo.mov)

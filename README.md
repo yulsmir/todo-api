@@ -20,3 +20,6 @@
   - ```localhost:3000/todos``` - shows all todos
   - ```localhost:3000/todos/?id=``` + add number 1-4 to show one existing item in a todo list 
   - use Thunder Client or Postman to check POST/PATCH/DELETE requests
+
+## Server demo
+[![Watch the demo](link to preview)]([https://youtu.be/vt5fpE0bzSY](https://raw.githubusercontent.com/yulsmir/todo-api/master/videos/Server%20Work%20Demo.mov))

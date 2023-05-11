@@ -58,7 +58,7 @@ const server = http.createServer((req, res) => {
     } else if (req.url === `/todos/?id=${searchId}`) {
       // Check if item with search id exists
       if (searchId <= lastItemId) {
-        // /todos?id=1. ----> List only single todo
+        // /todos?id=1 ----> List only single todo
         res.writeHead(200, responseHead);
         res.end(JSON.stringify({ todo: searchedItem }));
       } else {

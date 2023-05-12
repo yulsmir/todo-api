@@ -39,12 +39,12 @@ const server = http.createServer((req, res) => {
   const searchedItem = todos[searchId - 1];
   const firstItemId = todos[0].id;
   const lastItemId = todos.length;
-  const currentId = lastItemId + 1;
+  const newId = lastItemId + 1;
   const responseHead = { 'Content-Type': 'text/plain' };
 
   const todo = {
-    id: currentId,
-    title: `Title ${currentId}`,
+    id: newId,
+    title: `Title ${newId}`,
     completed: false,
   };
 
@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
     if (req.url === '/todos' || req.url === '/') {
       res.writeHead(200, responseHead);
       res.end(JSON.stringify({ todos }));
-    } else if (req.url === `/todos/?id=${searchId}`) {
+    } else if (req.url === `/todos?id=${searchId}`) {
       // Check if item with search id exists
       if (searchId <= lastItemId) {
         // /todos?id=1 ----> List only single todo
@@ -80,7 +80,7 @@ const server = http.createServer((req, res) => {
 
   // ------- PATCH -------
   // /todos?id=1  ---> update existing todo using the id
-  else if (req.method === 'PATCH' && req.url === `/todos/?id=${searchId}`) {
+  else if (req.method === 'PATCH' && req.url === `/todos?id=${searchId}`) {
     console.log(searchedItem);
 
     // Change values of title and completed status. ID stays the same
@@ -98,7 +98,7 @@ const server = http.createServer((req, res) => {
 
   // ------- DELETE -------
   // /todos?id=1  -- -> removes existing todo using the id
-  else if (req.method === 'DELETE' && req.url === `/todos/?id=${searchId}`) {
+  else if (req.method === 'DELETE' && req.url === `/todos?id=${searchId}`) {
     if (searchId >= firstItemId && searchId <= lastItemId) {
       // Delete with filter - v1
       // const result = todos.filter((item) => item.id !== searchId)

@@ -7,22 +7,11 @@
 ### Endpoints implemented
 
 - [X] GET  / ---> List all todos
-![GET home](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-home.png)
-
 - [X] GET  /todos ---> List all todos
-![GET todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-todos.png)
-
 - [X] GET  /todos?id=1. ----> List only single todo 1 in this case is just example of id but it should work with any id stored
-![GET todo by id](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-id.png)
-
 - [X] POST /todos ---> create new todo
-![POST todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/post-todos.png)
-
 - [X] PATCH /todos?id=1  ---> update existing todo using the id
-![PATCH todo by id](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/get-id.png)
-
 - [X] DELETE /todos?id=1  ---> removes existing todo using the id
-![DELETE todos](https://github.com/yulsmir/todo-api/blob/master/assets/screenshots/delete-id.png)
 
 ## Project setup
 1. Clone repo

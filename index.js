@@ -37,6 +37,7 @@ const server = http.createServer((req, res) => {
   const serverURL = url.parse(req.url, true);
   const searchId = parseInt(serverURL.query.id);
   const searchedItem = todos[searchId - 1];
+  const firstItemId = todos[0].id;
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
   const responseHead = { 'Content-Type': 'text/plain' };
@@ -98,22 +99,18 @@ const server = http.createServer((req, res) => {
   // ------- DELETE -------
   // /todos?id=1  -- -> removes existing todo using the id
   else if (req.method === 'DELETE' && req.url === `/todos?id=${searchId}`) {
-    if (searchId) {
+    if (searchId <= lastItemId && searchId >= firstItemId) {
       // Delete with filter - v1
       // result = todos.filter((item) => item.id !== searchIndex);
       // Delete with slice - v2
       const searchIndex = todos.findIndex((item) => item.id === searchId);
       todos = todos.slice(0, searchIndex).concat(todos.slice(searchIndex + 1));
       console.log(todos);
-      console.log(`search id ${searchId}`);
-      console.log(`search index ${searchIndex}`);
-      console.log(`searchedItem ${searchedItem}`);
-
       res.writeHead(202, responseHead);
       res.end(JSON.stringify({ todos: todos }));
     } else {
       res.writeHead(204, responseHead);
-      res.end(JSON.stringify({ error: 'Cannot delete item' }));
+      res.end(JSON.stringify({ error: 'Cannot delete item. Item id is out of range.' }));
     }
   } else {
     res.writeHead(404, responseHead);

@@ -37,6 +37,7 @@ const server = http.createServer((req, res) => {
   const serverURL = url.parse(req.url, true);
   const searchId = parseInt(serverURL.query.id);
   const searchedItem = todos[searchId - 1];
+  const searchIndex = todos.findIndex((item) => item.id === searchId);
   const firstItemId = todos[0].id;
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
@@ -103,7 +104,6 @@ const server = http.createServer((req, res) => {
       // Delete with filter - v1
       // result = todos.filter((item) => item.id !== searchIndex);
       // Delete with slice - v2
-      const searchIndex = todos.findIndex((item) => item.id === searchId);
       todos = todos.slice(0, searchIndex).concat(todos.slice(searchIndex + 1));
       console.log(todos);
       res.writeHead(202, responseHead);

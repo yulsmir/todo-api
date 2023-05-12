@@ -39,12 +39,12 @@ const server = http.createServer((req, res) => {
   const searchedItem = todos[searchId - 1];
   const firstItemId = todos[0].id;
   const lastItemId = todos.length;
-  const newId = lastItemId + 1;
+  const currentId = lastItemId + 1;
   const responseHead = { 'Content-Type': 'text/plain' };
 
   const todo = {
-    id: newId,
-    title: `Title ${newId}`,
+    id: currentId,
+    title: `Title ${currentId}`,
     completed: false,
   };
 
@@ -99,14 +99,14 @@ const server = http.createServer((req, res) => {
   // ------- DELETE -------
   // /todos?id=1  -- -> removes existing todo using the id
   else if (req.method === 'DELETE' && req.url === `/todos?id=${searchId}`) {
-    if (searchId >= firstItemId && searchId <= lastItemId) {
+    if (searchId) {
       // Delete with filter - v1
-      // const result = todos.filter((item) => item.id !== searchId)
+      // const todos = todos.filter((item) => item.id !== searchId)
       // Delete with slice - v2
       todos = todos.slice(0, searchId - 1).concat(todos.slice(searchId));
       console.log(todos);
 
-      res.writeHead(202, { 'Content-Type': 'text/plain' });
+      res.writeHead(202, responseHead);
       res.end(JSON.stringify({ todos }));
       return 'redirect:/';
     } else {

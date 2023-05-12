@@ -111,7 +111,7 @@ const server = http.createServer((req, res) => {
       return 'redirect:/';
     } else {
       res.writeHead(204, responseHead);
-      res.end(JSON.stringify({ error: 'Item id is out of range' }));
+      res.end(JSON.stringify({ error: 'Cannot delete item' }));
     }
   } else {
     res.writeHead(404, responseHead);

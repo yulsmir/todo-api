@@ -1,14 +1,7 @@
 const http = require('node:http');
-const fs = require('node:fs');
 const url = require('node:url');
 
 const PORT = 3000;
-
-// const todos = fs.readFile('./todos.json', 'utf8', (error, result) => {
-//   if (error) throw error;
-//   console.log(JSON.parse(result));
-//   return JSON.parse(result);
-// });
 
 let todos = [
   {

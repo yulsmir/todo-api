@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
   const firstItemId = todos[0].id;
   const lastItemId = todos.length;
   const currentId = lastItemId + 1;
-  const responseHead = { 'Content-Type': 'text/plain' };
+  const responseHead = { 'Content-Type': 'application/json' };
 
   const todo = {
     id: currentId,

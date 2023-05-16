@@ -4,26 +4,26 @@ const url = require('node:url');
 const PORT = 3000;
 
 let todos = [
-  // {
-  //   id: 1,
-  //   title: 'Title 1',
-  //   completed: false,
-  // },
-  // {
-  //   id: 2,
-  //   title: 'Title 2',
-  //   completed: false,
-  // },
-  // {
-  //   id: 3,
-  //   title: 'Title 3',
-  //   completed: false,
-  // },
-  // {
-  //   id: 4,
-  //   title: 'Title 4',
-  //   completed: false,
-  // },
+  {
+    id: 1,
+    title: 'Title 1',
+    completed: false,
+  },
+  {
+    id: 2,
+    title: 'Title 2',
+    completed: false,
+  },
+  {
+    id: 3,
+    title: 'Title 3',
+    completed: false,
+  },
+  {
+    id: 4,
+    title: 'Title 4',
+    completed: false,
+  },
 ];
 
 const server = http.createServer((req, res) => {

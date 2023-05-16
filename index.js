@@ -4,35 +4,35 @@ const url = require('node:url');
 const PORT = 3000;
 
 let todos = [
-  {
-    id: 1,
-    title: 'Title 1',
-    completed: false,
-  },
-  {
-    id: 2,
-    title: 'Title 2',
-    completed: false,
-  },
-  {
-    id: 3,
-    title: 'Title 3',
-    completed: false,
-  },
-  {
-    id: 4,
-    title: 'Title 4',
-    completed: false,
-  },
+  // {
+  //   id: 1,
+  //   title: 'Title 1',
+  //   completed: false,
+  // },
+  // {
+  //   id: 2,
+  //   title: 'Title 2',
+  //   completed: false,
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Title 3',
+  //   completed: false,
+  // },
+  // {
+  //   id: 4,
+  //   title: 'Title 4',
+  //   completed: false,
+  // },
 ];
 
 const server = http.createServer((req, res) => {
   const serverURL = url.parse(req.url, true);
   const searchId = parseInt(serverURL.query.id);
-  const searchedItem = todos[searchId - 1];
-  const searchIndex = todos.findIndex((item) => item.id === searchId);
-  const firstItemId = todos[0].id;
-  const lastItemId = todos.length;
+  const searchedItem = todos?.[searchId - 1];
+  const searchIndex = todos?.findIndex((item) => item.id === searchId);
+  const firstItemId = todos[0]?.id;
+  const lastItemId = todos?.length;
   const currentId = lastItemId + 1;
   const responseHead = { 'Content-Type': 'application/json' };
 
